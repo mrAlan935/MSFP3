@@ -1,4 +1,3 @@
-[![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=mrAlan935/MSFP3)
 # Práctica 3 — Modelado y control del sistema musculoesquelético
 
 Repositorio académico de la asignatura **Modelado de Sistemas Fisiológicos**, correspondiente al programa de **Ingeniería Biomédica** del Tecnológico Nacional de México / Instituto Tecnológico de Tijuana. Esta práctica integra analogía mecánico–eléctrica, análisis matemático por superposición, análisis de error y estabilidad, simulación en MATLAB/Simulink/Simscape, diseño de un controlador PI y reproducción independiente en Python.
@@ -108,16 +107,20 @@ $$
 
 En el análisis manuscrito se definen la corriente total $x(t)$, que se divide en una rama con $C_s$ ($x_1$) y otra con $R$ y $F_0$ ($x_2$), y que circula por $C_p$ hacia la salida $F_s(t)$.
 
-| Símbolo | Equivalente eléctrico | Valor |
-|---|---|---|
-| $F(t)$ | Voltaje de entrada | Pulso de $1\,\mathrm{V}$, $1\le t<2\,\mathrm{s}$ |
-| $F_0(t)=\alpha F(t)$ | Segunda fuente de voltaje | $\alpha=0.25$ |
-| $F_s(t)$ | Voltaje de salida | — |
-| $R$ | Resistencia | $100\,\Omega$ (*Control*); $10\,\mathrm{k}\Omega$ (*Caso*) |
-| $C_s$ | Capacitancia | $10\,\mu\mathrm{F}$ |
-| $C_p$ | Capacitancia | $100\,\mu\mathrm{F}$ |
+| Símbolo | Equivalente eléctrico | Interpretación fisiológica | Valor |
+|---|---|---|---|
+| $F(t)$ | Voltaje de entrada | Fuerza en la unión músculo–hueso | Pulso de $1\,\mathrm{V}$, $1\le t<2\,\mathrm{s}$ |
+| $F_0(t)=\alpha F(t)$ | Segunda fuente de voltaje | Fuerza generada por los sarcómeros | $\alpha=0.25$ |
+| $F_s(t)$ | Voltaje de salida | Fuerza de salida del sistema | — |
+| $R$ | Resistencia | Tejido blando viscoso | $100\,\Omega$ (*Control*); $10\,\mathrm{k}\Omega$ (*Caso*) |
+| $C_s$ | Capacitancia | Tendones y aponeurosis | $10\,\mu\mathrm{F}$ |
+| $C_p$ | Capacitancia | Sarcolema y tejido adiposo | $100\,\mu\mathrm{F}$ |
 
-> **Interpretación fisiológica:** la correspondencia exacta de cada elemento ($R$, $C_s$, $C_p$, $\alpha$) con una estructura musculoesquelética concreta debe tomarse del instructivo de la práctica. Los archivos disponibles definen la estructura matemática y los valores numéricos, pero no detallan esa asignación; complétese en esta sección con la interpretación de la asignatura.
+![Analogía mecánico–eléctrica del sistema musculoesquelético](biorender_musculoesqueletico.png)
+
+*Figura 1. Modelo mecánico del músculo (resorte $C_s$ en serie con el elemento contráctil $F_0$ y el amortiguador $R$, y resorte $C_p$ en paralelo) y su correspondencia con las estructuras anatómicas. Elaborada en BioRender.*
+
+Con esta asignación, el cambio entre *Control* y *Caso* ($R$ de $100\,\Omega$ a $10\,\mathrm{k}\Omega$) equivale a un tejido blando mucho más viscoso, que vuelve más lenta la transmisión de fuerza.
 
 En el modelo de Simscape, cada capacitor incluye una resistencia en serie parásita de $1\,\mu\Omega$ (`r = 1e-6`), valor numérico auxiliar que no forma parte del modelo analítico.
 
@@ -469,6 +472,7 @@ flowchart TD
 ├── obregon23212221.py               # Implementación en Python
 ├── Individual_matlab.pdf            # Figura exportada desde MATLAB
 ├── Individual_matlab.png            # Vista previa para el README
+├── biorender_musculoesqueletico.png # Figura de la analogía (BioRender)
 └── practica3_python.pdf             # Figura exportada desde Python
 ```
 
